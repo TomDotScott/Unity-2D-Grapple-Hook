@@ -1624,8 +1624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c3c44e4d10de74585d57d3341aa5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunPoint: {fileID: 285039155}
-  grapplePoint: {fileID: 866861117}
+  GunPoint: {fileID: 285039155}
+  GrapplePoint: {fileID: 866861117}
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -1737,8 +1737,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1746,7 +1746,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  waveHeight: 1.7
+  waveHeight: 3.5
+  progressionSpeed: 2.5
+  straightenSpeed: 5
 --- !u!4 &1848936659
 Transform:
   m_ObjectHideFlags: 0
