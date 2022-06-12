@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GrappleRope : MonoBehaviour
 {
+    public enum ERopeState
+    {
+        eFiring,
+        eStraightening,
+        eStraight
+    }
+
+    public ERopeState RopeState;
+
     public Transform GunPoint;
     public Transform GrapplePoint;
 
@@ -24,19 +34,10 @@ public class GrappleRope : MonoBehaviour
 
     [SerializeField] private float straightenSpeed;
 
-    private bool isStraight = false;
-
     // Start is called before the first frame update
     private void Start()
     {
-        currentWaveHeight = waveHeight;
-        lineRenderer = GetComponent<LineRenderer>();
-
-        activeTime = 0f;
-        lineRenderer.positionCount = numPointsOnCurve;
-
-        InitGrappleLine();
-
+        InitGrappleRope();
     }
 
     // Update is called once per frame
@@ -44,10 +45,28 @@ public class GrappleRope : MonoBehaviour
     {
         activeTime += Time.deltaTime;
         RenderRope();
+
+        if (RopeState == ERopeState.eStraight)
+        {
+            StartCoroutine("ResetRope");
+        }
     }
 
-    private void InitGrappleLine()
+    private IEnumerator ResetRope()
     {
+        yield return new WaitForSeconds(1f);
+        InitGrappleRope();
+    }
+
+    private void InitGrappleRope()
+    {
+        RopeState = ERopeState.eFiring;
+        currentWaveHeight = waveHeight;
+        lineRenderer = GetComponent<LineRenderer>();
+
+        activeTime = 0f;
+        lineRenderer.positionCount = numPointsOnCurve;
+
         for (int i = 0; i < numPointsOnCurve; i++)
         {
             lineRenderer.SetPosition(i, GunPoint.position);
@@ -56,33 +75,40 @@ public class GrappleRope : MonoBehaviour
 
     private void RenderRope()
     {
-        if (isStraight)
+        switch (RopeState)
         {
-            // When we hit the target, we want to make the waves smaller until they appear straight
-            if (currentWaveHeight > 0f)
-            {
-                currentWaveHeight -= Time.deltaTime * straightenSpeed;
-                RenderRopeWaves();
-            }
-            else
-            {
-                // Reset the line to be straight
-                currentWaveHeight = 0f;
-                lineRenderer.positionCount = 2;
+            case ERopeState.eFiring:
+                var lineRendererPosition = lineRenderer.GetPosition(numPointsOnCurve - 1).x;
+                var gunPosition = GunPoint.position.x;
 
-                RenderRopeStraight();
-            }
-        }
-        else
-        {
-            if (lineRenderer.GetPosition(numPointsOnCurve - 1).x == GunPoint.position.x)
-            {
-                isStraight = true;
-            }
-            else
-            {
+
+                if (lineRenderer.GetPosition(numPointsOnCurve - 1).x == GrapplePoint.position.x)
+                {
+                    RopeState = ERopeState.eStraightening;
+                }
                 RenderRopeWaves();
-            }
+                break;
+            case ERopeState.eStraightening:
+                // When we hit the target, we want to make the waves smaller until they appear straight
+                if (currentWaveHeight > 0f)
+                {
+                    currentWaveHeight -= Time.deltaTime * straightenSpeed;
+                    RenderRopeWaves();
+                }
+                else
+                {
+                    // Reset the line to be straight
+                    currentWaveHeight = 0f;
+                    lineRenderer.positionCount = 2;
+                    RopeState = ERopeState.eStraight;
+                    RenderRopeStraight();
+                }
+                break;
+            case ERopeState.eStraight:
+                RenderRopeStraight();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
