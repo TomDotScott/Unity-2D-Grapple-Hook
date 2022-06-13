@@ -40,16 +40,21 @@ public class GrappleRope : MonoBehaviour
         InitGrappleRope();
     }
 
+    private void OnEnable()
+    {
+        InitGrappleRope();
+    }
+
     // Update is called once per frame
     private void Update()
     {
         activeTime += Time.deltaTime;
         RenderRope();
 
-        if (RopeState == ERopeState.eStraight)
-        {
-            StartCoroutine("ResetRope");
-        }
+        //if (RopeState == ERopeState.eStraight)
+        //{
+        //    StartCoroutine("ResetRope");
+        //}
     }
 
     private IEnumerator ResetRope()
