@@ -34,12 +34,6 @@ public class GrappleRope : MonoBehaviour
 
     [SerializeField] private float straightenSpeed;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        InitGrappleRope();
-    }
-
     private void OnEnable()
     {
         InitGrappleRope();
@@ -50,17 +44,6 @@ public class GrappleRope : MonoBehaviour
     {
         activeTime += Time.deltaTime;
         RenderRope();
-
-        //if (RopeState == ERopeState.eStraight)
-        //{
-        //    StartCoroutine("ResetRope");
-        //}
-    }
-
-    private IEnumerator ResetRope()
-    {
-        yield return new WaitForSeconds(1f);
-        InitGrappleRope();
     }
 
     private void InitGrappleRope()

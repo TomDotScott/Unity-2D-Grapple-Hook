@@ -147,7 +147,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.99, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 21.758162, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1848936659}
   m_Father: {fileID: 1113007929}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -848,7 +849,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921642809
 GameObject:
@@ -862,7 +863,7 @@ GameObject:
   - component: {fileID: 921642812}
   - component: {fileID: 921642811}
   - component: {fileID: 921642810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1128,7 +1129,11 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   grappleRope: {fileID: 1848936658}
   firePoint: {fileID: 285039155}
-  maxDistance: 15
+  grapplePoint: {fileID: 866861117}
+  maxDistance: 5.4
+  grappleLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1113007931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,7 +1603,7 @@ GameObject:
   - component: {fileID: 1724543194}
   - component: {fileID: 1724543193}
   - component: {fileID: 1724543192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1772,7 +1777,7 @@ GameObject:
   m_Layer: 0
   m_Name: GrappleRope
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1921,12 +1926,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848936657}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -2.33, z: -4.441991}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.148994, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 285039155}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1848936660
 LineRenderer:
@@ -2037,7 +2042,7 @@ GameObject:
   - component: {fileID: 1881430349}
   - component: {fileID: 1881430348}
   - component: {fileID: 1881430347}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
